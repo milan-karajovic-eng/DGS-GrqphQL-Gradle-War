@@ -56,3 +56,33 @@ The application demonstrates how to create an effective application that impleme
 	  
 - Database - For this demo application is used inmemory H2 database. Configuration for the database is in the application.properties file. data.sql script is used for initial filing database with data.
 - Tests - Test are in the src/test/java/com/example/presscentric/test_milan_karajovic_presscetnric/fetcher . There are tests for the Queries and Mutations.
+
+
+
+## Build, and run application using docker.
+
+- Prerequest is to have installed Docker on your machine.
+- Download source code for this exaple from the Github.
+- Build the application using Gradle (For building I suggest to use STS or intelliJ IDEA development environment. However, you can do that also manually with gradle command).
+```bash
+  ./gradlew clean build
+```
+- The .war file is created in the folder build\libs: test-milan-karajovic-presscetnric-0.0.1-SNAPSHOT.war
+- Using Docker file, we ceate image tomcat-test-milan-karajovic-presscetnric using next command in the console (It is necessary to open the console in the root folder of the project). The command is:
+```bash
+docker run -p 80:8080 tomcat-test-milan-karajovic-presscetnric
+```
+- Now, we can start applciaton using docker-compose.yaml file.  (It is necessary to open the console in the root folder of the project). The command is:
+```bash
+docker-compose up
+```
+- After application is success started, let’s just use the GraphiQL tool to run test queries. It is automatically included in the application by the Netflix DGS library. We may display it by invoking the URL http://localhost/test-milan-karajovic-presscetnric-0.0.1-SNAPSHOT/graphiql .
+ - GraphQL tool dashboard. There are all Queries and Mutations:
+  ![Alt text](Documentation/GraphQL-Dashboard01.jpg)
+ - Show all users in database using Query:
+  ![Alt text](Documentation/GraphQL-Dashboard02.jpg)
+ - Crete user using Mutation:
+  ![Alt text](Documentation/GraphQL-Dashboard03.jpg)
+ - Show all users after creted new user in the previous step:
+  ![Alt text](Documentation/GraphQL-Dashboard04.jpg)
+ - You can check all Queries and Mutation yourself using this dashboard.
