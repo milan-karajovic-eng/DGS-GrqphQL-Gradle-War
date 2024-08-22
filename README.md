@@ -76,7 +76,9 @@ docker run -p 80:8080 tomcat-test-milan-karajovic-presscetnric
 ```bash
 docker-compose up
 ```
-- After application is success started, let’s just use the GraphiQL tool to run test queries. It is automatically included in the application by the Netflix DGS library. We may display it by invoking the URL http://localhost/test-milan-karajovic-presscetnric-0.0.1-SNAPSHOT/graphiql .(securyti is implemented. Username and password is in  the file src\main\resources\application.properties )
+- After application is success started, let’s just use the GraphiQL tool to run test queries. It is automatically included in the application by the Netflix DGS library. We may display it by invoking the URL http://localhost/test-milan-karajovic-presscetnric-0.0.1-SNAPSHOT/graphiql .(securyti is implemented. 
+ - Username and password is in  the file src\main\resources\application.properties
+  ![Alt text](Documentation/GraphQL-Dashboard00.jpg)
  - GraphQL tool dashboard. There are all Queries and Mutations:
   ![Alt text](Documentation/GraphQL-Dashboard01.jpg)
  - Show all users in database using Query:
