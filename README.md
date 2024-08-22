@@ -15,10 +15,12 @@ Example DGS Framework for GraphQL using war file to deploy on the Tomcat server 
 - Spring Boot 3.3.2, 
 - Netflix DGS GraphQL 9.0.4
 - JPA
-- H2 database
 - Gradle
 - Lombok
 - JUnit
+
+**Database:**
+- H2
 
 **Start application:**
 - Tomcat
@@ -51,8 +53,8 @@ The application demonstrates how to create an effective application that impleme
 
     - Fetcher: (src\main\java\com\example\presscentric\test_milan_karajovic_presscetnric\fetcher) - This is central part of the DGS GraphQL application. There are defined Queries and Mutations regarding to the declaration in the schema.graphql file.
       - Netflix DGS provides annotation-based support for Spring Boot.
-      - The UserFetcher is responsible for defining queries related to the User object. We should annotate such a class with @DgsComponent . Then, we have to annotate every query method with @DgsData . The fields parentType and fields should match the names declared in GraphQL schemas for Queries. We can see that in the file schema.graphql are defined two queries, so we have three methods inside UserFetcher. To fetch data from the database are used methodes from the Service class. The last query method findUserById performs advanced filtering based on the user id field passed in the input. To pass an input parameter we should annotate the method argument with @InputArgument.
-      - In comparison to the data fetchers implementation is similar. The fields parentType and fields should match the names declared in GraphQL schemas for Mutations. To pass an input parameter we should annotate the method argument with @InputArgument. To execute Muttaion methodes are used methodes from the Service class.
+      - The UserFetcher is responsible for defining queries related to the User object. We should annotate such a class with @DgsComponent . Then, we have to annotate every query method with @DgsData . The fields parentType and fields should match the names declared in GraphQL schemas for Queries. We can see that in the file schema.graphql are defined two queries, so we have two methods inside UserFetcher. To fetch data from the database are used methodes from the Service class. The last query method findUserById performs advanced filtering based on the user id field passed in the input. To pass an input parameter we should annotate the method argument with @InputArgument.
+      - In comparison to the UserFetcher, UserMutation implementation is similar. The fields parentType and fields should match the names declared in GraphQL schemas for Mutations. To pass an input parameter we should annotate the method argument with @InputArgument. To execute Muttaion methodes are used methodes from the Service class.
 	  
 - Database - For this demo application is used inmemory H2 database. Configuration for the database is in the application.properties file. data.sql script is used for initial filing database with data.
 - Tests - Test are in the src/test/java/com/example/presscentric/test_milan_karajovic_presscetnric/fetcher . There are tests for the Queries and Mutations.
@@ -76,7 +78,7 @@ docker run -p 80:8080 tomcat-test-milan-karajovic-presscetnric
 ```bash
 docker-compose up
 ```
-- After application is success started, let’s just use the GraphiQL tool to run test queries. It is automatically included in the application by the Netflix DGS library. We may display it by invoking the URL http://localhost/test-milan-karajovic-presscetnric-0.0.1-SNAPSHOT/graphiql .(securyti is implemented. 
+- After application is success started, let’s just use the GraphiQL tool to run test queries. It is automatically included in the application by the Netflix DGS library. We may display it by invoking the URL http://localhost/test-milan-karajovic-presscetnric-0.0.1-SNAPSHOT/graphiql (securyti is implemented). 
  - Username and password are in  the file src\main\resources\application.properties
   ![Alt text](Documentation/GraphQL-Dashboard00.jpg)
  - GraphQL tool dashboard. There are all Queries and Mutations:
