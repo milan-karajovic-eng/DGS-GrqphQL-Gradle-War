@@ -72,7 +72,7 @@ The application demonstrates how to create an effective application that impleme
 - The .war file is created in the folder build\libs: test-milan-karajovic-presscetnric-0.0.1-SNAPSHOT.war
 - Using Docker file, we ceate image tomcat-test-milan-karajovic-presscetnric using next command in the console (It is necessary to open the console in the root folder of the project). The command is:
 ```bash
-docker run -p 80:8080 tomcat-test-milan-karajovic-presscetnric
+docker build -t tomcat-test-milan-karajovic-presscetnric .
 ```
 - Now, we can start applciaton using docker-compose.yaml file.  (It is necessary to open the console in the root folder of the project). The command is:
 ```bash
