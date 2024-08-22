@@ -1,2 +1,58 @@
 # DGS-GrqphQL-Gradle-War
 Example DGS Framework for GraphQL using war file to deploy on the Tomcat server using Docker
+
+
+
+## Author
+
+- Milan Karajovic
+
+
+## Tech Stack
+
+**Server:** 
+- Java 17, 
+- Spring Boot 3.3.2, 
+- Netflix DGS GraphQL 9.0.4
+- JPA
+- H2 database
+- Gradle
+- Lombok
+- JUnit
+
+**Start application:**
+- Tomcat
+- Docker
+
+## Documentation
+
+The application demonstrates how to create an effective application that implements GraphQL using the [Netflix DGS](https://netflix.github.io/dgs/) framework in the [Spring Boot](https://spring.io/projects/spring-boot) application .
+
+### Application development and analysis
+- Create spring Boot applciation using [Spring Initializr](https://start.spring.io/). Setup is shown on the picture below:
+
+  ![Alt text](Documentation/SpringIntitializrWithDependencies.jpg)
+
+- The DGS framework is designed for schema first development. The framework picks up any schema files in the src/main/resources/schema folder. We created schema file schema.graphql. In this file are defined types, queries and mutations. Regarding this class we create classes in specific packages in the application.
+
+- It is possible using DGS plugin to generated Java source code using previously defined GraphQL schemas. However, I prefer to use Lombok annotations, so I did that manually.
+
+- This is application structure:
+
+  ![Alt text](Documentation/ApplicationStructure.jpg)
+
+- The most important clases are:
+
+    - Domain: (src\main\java\com\example\presscentric\test_milan_karajovic_presscetnric\domain) - Thera are defined domain object which exists in the above mentioned file schema\schema.graphql .
+
+    - Repository: (src\main\java\com\example\presscentric\test_milan_karajovic_presscetnric\repository) - Thera are defined JPA repository which is used from the application to communicate with databse.
+
+    - Service: (src\main\java\com\example\presscentric\test_milan_karajovic_presscetnric\service) - Service is layer which is between fatcher and repository.
+
+    - Fetcher: (src\main\java\com\example\presscentric\test_milan_karajovic_presscetnric\fetcher) - This is central part of the DGS GraphQL application. There are defined Queries and Mutations regarding to the declaration in the schema.graphql file.
+      - Netflix DGS provides annotation-based support for Spring Boot.
+      - The UserFetcher is responsible for defining queries related to the User object. We should annotate such a class with @DgsComponent . Then, we have to annotate every query method with @DgsData . The fields parentType and fields should match the names declared in GraphQL schemas for Queries. We can see that in the file schema.graphql are defined two queries, so we have three methods inside UserFetcher. To fetch data from the database are used methodes from the Service class. The last query method findUserById performs advanced filtering based on the user id field passed in the input. To pass an input parameter we should annotate the method argument with @InputArgument.
+      - In comparison to the data fetchers implementation is similar. The fields parentType and fields should match the names declared in GraphQL schemas for Mutations. To pass an input parameter we should annotate the method argument with @InputArgument. To execute Muttaion methodes are used methodes from the Service class.
+	  
+- Database - For this demo application is used inmemory H2 database. Configuration for the database is in the application.properties file. data.sql script is used for initial filing database with data.
+- Tests - Test are in the src/test/java/com/example/presscentric/test_milan_karajovic_presscetnric/fetcher . There are tests for the Queries and Mutations.
